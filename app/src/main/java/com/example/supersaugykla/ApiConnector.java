@@ -2,22 +2,26 @@ package com.example.supersaugykla;
 import android.util.Log;
 
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.IOException;
 
-/**
- * Created by tahseen0amin on 16/02/2014.
- */
 public class ApiConnector {
 
 
-    public JSONArray GetAllCustomers()
+    public JSONArray GetAllWorkers()
     {
-        // URL for getting all customers
+        // URL for getting all workers
 
 
-        String url = "http://127.0.0.1/duomenusaugykla/workers/getAllCustomers.php";
+        String url = "http://locahost/scripts/getAllWorkers.php";
 
         // Get HttpResponse Object from url.
         // Get HttpEntity from Http Response Object
