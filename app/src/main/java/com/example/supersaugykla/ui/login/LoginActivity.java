@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.supersaugykla.MainActivity;
 import com.example.supersaugykla.R;
 import com.example.supersaugykla.ui.login.LoginViewModel;
 import com.example.supersaugykla.ui.login.LoginViewModelFactory;
@@ -116,12 +118,16 @@ public class LoginActivity extends AppCompatActivity {
 
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 loginViewModel.login(usernameEditText.getText().toString());
+                openNewActivity();
             }
         });
 
         
     }
-
+    private void openNewActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
