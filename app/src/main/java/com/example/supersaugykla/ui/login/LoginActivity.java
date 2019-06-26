@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /*
+
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
-        });*/
+        });
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
