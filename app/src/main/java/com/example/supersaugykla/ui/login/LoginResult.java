@@ -1,4 +1,4 @@
-package  com.example.supersaugykla.ui.login;
+package com.example.supersaugykla.ui.login;
 
 import androidx.annotation.Nullable;
 

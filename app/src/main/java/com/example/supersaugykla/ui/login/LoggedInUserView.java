@@ -1,4 +1,4 @@
-package  com.example.supersaugykla.ui.login;
+package com.example.supersaugykla.ui.login;
 
 /**
  * Class exposing authenticated user details to the UI.
