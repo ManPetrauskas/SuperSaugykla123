@@ -23,7 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.supersaugykla.MainActivity;
+import com.example.supersaugykla.Main;
 import com.example.supersaugykla.R;
 import com.example.supersaugykla.ui.login.LoginViewModel;
 import com.example.supersaugykla.ui.login.LoginViewModelFactory;
@@ -115,9 +115,8 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString());
+                //loginViewModel.login(usernameEditText.getText().toString());
                 openNewActivity();
             }
         });
@@ -125,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
         
     }
     private void openNewActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Main.class);
         startActivity(intent);
     }
     private void updateUiWithUser(LoggedInUserView model) {
