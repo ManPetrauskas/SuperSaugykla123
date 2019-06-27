@@ -38,7 +38,7 @@
         android:layout_marginTop="200dp"
         android:textSize="40dp"
         android:fontFamily="Arial"
-        android:text="Date2" />
+        android:text="Date 2" />
 
     <Button
         android:id="@+id/startButton"
