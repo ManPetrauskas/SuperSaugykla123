@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="150dp"
         android:textSize="20dp"
         android:fontFamily="Arial"
         android:text="Time" />
@@ -24,10 +24,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:textSize="25dp"
         android:fontFamily="Arial"
         android:text="Date 1" />
+
+    <TextView
+        android:id="@+id/textExplain1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:fontFamily="Arial"
+        android:text="Date when started:"
+        android:textSize="25dp" />
 
     <TextView
         android:id="@+id/date2Text"
@@ -38,6 +49,7 @@
         android:layout_marginTop="200dp"
         android:textSize="25dp"
         android:fontFamily="Arial"
+        android:visibility="invisible"
         android:text="Date 2" />
 
     <Button
