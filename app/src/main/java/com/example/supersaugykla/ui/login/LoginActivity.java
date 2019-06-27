@@ -118,13 +118,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString());
-                if(usernameEditText.getText().toString()=="user"){
-                    openUserActivity();
-                }
-                else{
-                    openAdminActivity();
-                }
-
+                openUserActivity();
             }
         });
 
