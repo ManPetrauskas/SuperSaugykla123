@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.time.LocalDate;
@@ -14,24 +16,67 @@ public class Time extends AppCompatActivity {
     private TextView date1Variable;
     private TextView date2Variable;
     private TextView timeTextVariable;
+    private Button startButton;
     private Date firstTimeStamp;
     private Date secondTimeStamp;
     private long timeDiff;
+    private Thread thread;
+    private boolean isRunning;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
+        this.startButton = findViewById(R.id.startButton);
         this.date1Variable = findViewById(R.id.date1Text);
         this.date2Variable = findViewById(R.id.date2Text);
         this.timeTextVariable = findViewById(R.id.timeText);
-        LocalDate myObj = LocalDate.now();
+        this.isRunning = false;
+        this.startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isRunning){
+                    stopTimer();
+                }
+                else {
+                    startTimer();
+                }
+            }
+        });
+        this.thread = new Thread() {
+
+            @Override
+            public void run() {
+                try {
+                    while (!thread.isInterrupted()) {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(isRunning){
+                                    RefreshTime();
+                                }
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+
+        thread.start();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private void StartTimer(){
+    private void startTimer(){
+        this.startButton.setText("Stop Timer");
+        isRunning=true;
         this.firstTimeStamp = convertToDateViaSqlDate(LocalDate.now());
         this.date1Variable.setText(firstTimeStamp.toString());
+    }
+    private void stopTimer(){
+        this.startButton.setText("Start Timer");
+        isRunning=false;
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void RefreshTime(){
