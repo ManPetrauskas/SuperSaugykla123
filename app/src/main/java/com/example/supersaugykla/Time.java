@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -20,6 +22,7 @@ public class Time extends AppCompatActivity {
     private Date firstTimeStamp;
     private Date secondTimeStamp;
     private long timeDiff;
+    private DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     private Thread thread;
     private boolean isRunning;
 
@@ -28,6 +31,7 @@ public class Time extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
+
         this.startButton = findViewById(R.id.startButton);
         this.date1Variable = findViewById(R.id.date1Text);
         this.date2Variable = findViewById(R.id.date2Text);
@@ -71,8 +75,9 @@ public class Time extends AppCompatActivity {
     private void startTimer(){
         this.startButton.setText("Stop Timer");
         isRunning=true;
-        this.firstTimeStamp = convertToDateViaSqlDate(LocalDate.now());
-        this.date1Variable.setText(firstTimeStamp.toString());
+        this.firstTimeStamp = new Date();
+        this.date1Variable.setText(dateFormat.format(this.firstTimeStamp));
+        RefreshTime();
     }
     private void stopTimer(){
         this.startButton.setText("Start Timer");
@@ -80,16 +85,18 @@ public class Time extends AppCompatActivity {
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void RefreshTime(){
-        this.secondTimeStamp = convertToDateViaSqlDate(LocalDate.now());
-        this.date2Variable.setText(this.secondTimeStamp.toString());
+        this.secondTimeStamp = new Date();
+        this.date2Variable.setText(dateFormat.format(this.secondTimeStamp));
         this.timeDiff=this.secondTimeStamp.getTime()-this.firstTimeStamp.getTime();
         long diffSeconds = this.timeDiff / 1000 % 60;
         long diffMinutes = this.timeDiff / (60 * 1000) % 60;
         long diffHours = this.timeDiff / (60 * 60 * 1000);
         this.timeTextVariable.setText("You are "+diffHours+" h "+diffMinutes+" min "+diffSeconds+" sec  working");
     }
+    /*
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return (Date) java.sql.Date.valueOf(String.valueOf(dateToConvert));
     }
+    */
 }
