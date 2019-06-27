@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.supersaugykla.Main;
 import com.example.supersaugykla.R;
+import com.example.supersaugykla.Time;
 import com.example.supersaugykla.ui.login.LoginViewModel;
 import com.example.supersaugykla.ui.login.LoginViewModelFactory;
 
@@ -117,13 +118,23 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString());
-                openNewActivity();
+                if(usernameEditText.getText().toString()=="user"){
+                    openUserActivity();
+                }
+                else{
+                    openAdminActivity();
+                }
+
             }
         });
 
         
     }
-    private void openNewActivity(){
+    private void openUserActivity(){
+        Intent intent = new Intent(this, Time.class);
+        startActivity(intent);
+    }
+    private void openAdminActivity(){
         Intent intent = new Intent(this, Main.class);
         startActivity(intent);
     }
