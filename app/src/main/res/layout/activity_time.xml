@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
-        android:textSize="40dp"
+        android:textSize="20dp"
         android:fontFamily="Arial"
         android:text="Time" />
 
@@ -25,7 +25,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:textSize="40dp"
+        android:textSize="25dp"
         android:fontFamily="Arial"
         android:text="Date 1" />
 
@@ -36,7 +36,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:textSize="40dp"
+        android:textSize="25dp"
         android:fontFamily="Arial"
         android:text="Date 2" />
 
