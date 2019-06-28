@@ -55,10 +55,10 @@ public class Main {
         connection.close();
     }
 
-    public static void sqlUpdateEndWorkMethod() throws SQLException {
+    public static void sqlUpdateEndWorkMethod(String token) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-        String sqlUpdateEndWork = "UPDATE workers SET `Last time ended` = CURRENT_TIMESTAMP WHERE `ID`=1;";
+        String sqlUpdateEndWork = "UPDATE workers SET `Last time ended` = CURRENT_TIMESTAMP WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlUpdateEndWork);                  //Updatina userio darbo baigima
         System.out.println("Worker stopped working");
@@ -75,20 +75,20 @@ public class Main {
         connection.close();
     }
 
-    public static void sqlUpdateBooleanToTrue() throws SQLException {
+    public static void sqlUpdateBooleanToTrue(String token) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-        String sqlUpdateBooleanToTrue = "UPDATE workers SET `Checkas` = TRUE WHERE `ID`=1;";
+        String sqlUpdateBooleanToTrue = "UPDATE workers SET `Checkas` = TRUE WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlUpdateBooleanToTrue);
         System.out.println("Boolean changed to true");
         connection.close();
     }
 
-    public static void sqlUpdateBooleanToFalse() throws SQLException {
+    public static void sqlUpdateBooleanToFalse(String token) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-        String sqlUpdateBooleanToTrue = "UPDATE workers SET `Checkas` = FALSE WHERE `ID`=1;";
+        String sqlUpdateBooleanToTrue = "UPDATE workers SET `Checkas` = FALSE WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlUpdateBooleanToTrue);
         System.out.println("Boolean changed to false");
