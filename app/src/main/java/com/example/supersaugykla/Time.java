@@ -31,7 +31,13 @@ public class Time extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
+        //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti boolean)=====
 
+        //=============================================================================
+        if(isRunning){
+            //======Tureciau pasiekti pradine data is db ir gauti dabartini total time=================
+            //=========================================================================================
+        }
         this.startButton = findViewById(R.id.startButton);
         this.date1Variable = findViewById(R.id.date1Text);
         this.date2Variable = findViewById(R.id.date2Text);
@@ -75,16 +81,22 @@ public class Time extends AppCompatActivity {
     private void startTimer(){
         this.startButton.setText("Stop Timer");
         isRunning=true;
+        //===============Timerio pradejimas bazeje ir gavimas pradines datos ir boolean pakeisti=====
+        //=======================================================================
         this.firstTimeStamp = new Date();
         this.date1Variable.setText(dateFormat.format(this.firstTimeStamp));
         RefreshTime();
     }
     private void stopTimer(){
+        //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
+        //============================================================================================
         this.startButton.setText("Start Timer");
         isRunning=false;
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void RefreshTime(){
+        //================Pasiekti Total time===================================================
+        //======================================================================================
         this.secondTimeStamp = new Date();
         this.date2Variable.setText(dateFormat.format(this.secondTimeStamp));
         this.timeDiff=this.secondTimeStamp.getTime()-this.firstTimeStamp.getTime();
