@@ -131,10 +131,10 @@ public class LoginActivity extends AppCompatActivity {
     private  void openOneOfActivities(){
         showYourID=findViewById(R.id.username);
         loginToken = showYourID.getText().toString();
-        if(loginToken=="a5"){
+        if (loginToken.equals("a")){
             openAdminActivity();
         }
-        else {
+        else{
             openUserActivity();
         }
     }
