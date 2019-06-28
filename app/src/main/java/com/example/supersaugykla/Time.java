@@ -31,7 +31,7 @@ public class Time extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
-        //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti i kintamaji reiksme)=====
+        //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti boolean)=====
 
         //=============================================================================
         this.startButton = findViewById(R.id.startButton);
