@@ -77,7 +77,7 @@ public class Time extends AppCompatActivity {
     private void startTimer(){
         this.startButton.setText("Stop Timer");
         isRunning=true;
-        //===============Timerio pradejimas bazeje ir gavimas pradines datos=====
+        //===============Timerio pradejimas bazeje ir gavimas pradines datos ir boolean pakeisti=====
         //=======================================================================
         this.firstTimeStamp = new Date();
         this.date1Variable.setText(dateFormat.format(this.firstTimeStamp));
