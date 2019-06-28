@@ -28,7 +28,11 @@ public class Main {
         statement.executeUpdate(sqlUpdateHours);                    //Updatina visu useriu dienos valandas suskaiciuotas (reik kaskart updatint kad atsinaujintu)
         System.out.println("data inserted");
         connection.close();
-    */}
+
+    */
+        sqlUpdateStartWorkMethod("21vdf541gvcx");
+        sqlUpdateHours();
+    }
 
     public static void sqlAddWorkerMethod() throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
@@ -41,20 +45,20 @@ public class Main {
         connection.close();
     }
 
-    public static void sqlUpdateStartWorkMethod() throws SQLException {
+    public static void sqlUpdateStartWorkMethod(String token) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-        String sqlUpdateStartWork = "UPDATE workers SET `Last time started` = CURRENT_TIMESTAMP WHERE `ID`=1;";
+        String sqlUpdateStartWork = "UPDATE workers SET `Last time started` = CURRENT_TIMESTAMP WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlUpdateStartWork);                  //Updatina userio darbo pradzia
         System.out.println("Worker started working");
         connection.close();
     }
 
-    public static void sqlUpdateEndWorkMethond() throws SQLException {
+    public static void sqlUpdateEndWorkMethod(String token) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-        String sqlUpdateEndWork = "UPDATE workers SET `Last time ended` = CURRENT_TIMESTAMP WHERE `ID`=15;";
+        String sqlUpdateEndWork = "UPDATE workers SET `Last time ended` = CURRENT_TIMESTAMP WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlUpdateEndWork);                  //Updatina userio darbo baigima
         System.out.println("Worker stopped working");
@@ -68,6 +72,26 @@ public class Main {
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlUpdateHours);                    //Updatina visu useriu dienos valandas suskaiciuotas (reik kaskart updatint kad atsinaujintu)
         System.out.println("Total hours updated");
+        connection.close();
+    }
+
+    public static void sqlUpdateBooleanToTrue(String token) throws SQLException {
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+        String sqlUpdateBooleanToTrue = "UPDATE workers SET `Checkas` = TRUE WHERE `Login Token`=\""+token+"\";";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(sqlUpdateBooleanToTrue);
+        System.out.println("Boolean changed to true");
+        connection.close();
+    }
+
+    public static void sqlUpdateBooleanToFalse(String token) throws SQLException {
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+        String sqlUpdateBooleanToTrue = "UPDATE workers SET `Checkas` = FALSE WHERE `Login Token`=\""+token+"\";";
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(sqlUpdateBooleanToTrue);
+        System.out.println("Boolean changed to false");
         connection.close();
     }
 }
