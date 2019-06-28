@@ -121,19 +121,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString());
-                showYourID=findViewById(R.id.username);
-                loginToken = showYourID.getText().toString();
-                if(loginToken=="a5"){
-                    openAdminActivity();
-                }
-                else {
-                    openUserActivity();
-                }
+                openOneOfActivities();
 
             }
         });
 
         
+    }
+    private  void openOneOfActivities(){
+        showYourID=findViewById(R.id.username);
+        loginToken = showYourID.getText().toString();
+        if(loginToken=="a5"){
+            openAdminActivity();
+        }
+        else {
+            openUserActivity();
+        }
     }
     private void openUserActivity(){
         Intent intent = new Intent(this, Time.class);
