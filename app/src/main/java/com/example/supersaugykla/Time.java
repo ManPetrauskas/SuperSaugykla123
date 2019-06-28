@@ -9,6 +9,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.supersaugykla.ui.login.LoginActivity;
+import com.example.supersaugykla.ui.login.LoginViewModel;
+import com.example.supersaugykla.ui.login.LoginViewModelFactory;
+
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -32,7 +37,11 @@ public class Time extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
         //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti boolean)=====
-
+        try {
+            System.out.println(Main.sqlGetBoolean(LoginActivity.loginToken));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         //=============================================================================
         if(isRunning){
             //======Tureciau pasiekti pradine data is db ir gauti dabartini total time=================
@@ -48,7 +57,11 @@ public class Time extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(isRunning){
-                    stopTimer();
+                    try {
+                        stopTimer();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
                 else {
                     startTimer();
@@ -88,8 +101,9 @@ public class Time extends AppCompatActivity {
         this.date1Variable.setText(dateFormat.format(this.firstTimeStamp));
         RefreshTime();
     }
-    private void stopTimer(){
+    private void stopTimer() throws SQLException {
         //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
+        System.out.println(Main.sqlGetBoolean(LoginActivity.loginToken));
         //============================================================================================
         this.startButton.setText("Start Timer");
         isRunning=false;

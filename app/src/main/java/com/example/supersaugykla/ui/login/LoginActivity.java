@@ -33,7 +33,7 @@ import com.example.supersaugykla.ui.login.LoginViewModelFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-    public String loginToken;
+    public static String loginToken;
     private TextView showYourID;
 
     @Override
