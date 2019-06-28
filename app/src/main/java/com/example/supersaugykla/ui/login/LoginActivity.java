@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                 //loginViewModel.login(usernameEditText.getText().toString());
                 showYourID=findViewById(R.id.username);
                 loginToken = showYourID.getText().toString();
-                if(loginToken=="a5s8er3a4ase"){
+                if(loginToken=="a5"){
                     openAdminActivity();
                 }
                 else {
