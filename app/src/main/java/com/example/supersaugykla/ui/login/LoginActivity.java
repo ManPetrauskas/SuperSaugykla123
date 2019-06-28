@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.supersaugykla.Admin;
 import com.example.supersaugykla.Main;
 import com.example.supersaugykla.R;
 import com.example.supersaugykla.Time;
@@ -32,6 +33,8 @@ import com.example.supersaugykla.ui.login.LoginViewModelFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    public String loginToken;
+    private TextView showYourID;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +121,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
                 //loginViewModel.login(usernameEditText.getText().toString());
-                openUserActivity();
+                showYourID=findViewById(R.id.username);
+                loginToken = showYourID.getText().toString();
+                if(loginToken=="a5s8er3a4ase"){
+                    openAdminActivity();
+                }
+                else {
+                    openUserActivity();
+                }
+
             }
         });
 
@@ -129,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
     private void openAdminActivity(){
-        Intent intent = new Intent(this, Main.class);
+        Intent intent = new Intent(this, Admin.class);
         startActivity(intent);
     }
     private void updateUiWithUser(LoggedInUserView model) {

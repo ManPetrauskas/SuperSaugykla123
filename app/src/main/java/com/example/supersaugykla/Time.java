@@ -36,6 +36,7 @@ public class Time extends AppCompatActivity {
         //=============================================================================
         if(isRunning){
             //======Tureciau pasiekti pradine data is db ir gauti dabartini total time=================
+
             //=========================================================================================
         }
         this.startButton = findViewById(R.id.startButton);
