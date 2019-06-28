@@ -3,7 +3,8 @@ package com.example.supersaugykla;
 import com.example.supersaugykla.connectivity.ConnectionClass;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,8 +31,11 @@ public class Main {
         connection.close();
 
     */
-        sqlUpdateStartWorkMethod("21vdf541gvcx");
+        //sqlUpdateStartWorkMethod("21vdf541gvcx");
         sqlUpdateHours();
+        System.out.println(sqlGetBoolean("21vdf541gvcx"));
+        System.out.println(sqlGetLastTimeStarted("21vdf541gvcx").toString());
+        System.out.println(sqlGetLastTimeEnded("21vdf541gvcx").toString());
     }
 
     public static void sqlAddWorkerMethod() throws SQLException {
@@ -93,5 +97,40 @@ public class Main {
         statement.executeUpdate(sqlUpdateBooleanToTrue);
         System.out.println("Boolean changed to false");
         connection.close();
+    }
+
+    public static boolean sqlGetBoolean(String token) throws SQLException {
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+        String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sqlGetBoolean);
+        boolean checkas = true;
+        while(rs.next()){
+            checkas = rs.getBoolean("Checkas");
+        }
+        return checkas;
+    }
+
+    public static Date sqlGetLastTimeStarted(String token) throws SQLException {
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+        String sqlGetBoolean = "SELECT `Last time started` FROM `workers` WHERE `Login Token`=\""+token+"\";";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sqlGetBoolean);
+        rs.next();
+        Date checkas = rs.getDate("Last time started");
+        return checkas;
+    }
+
+    public static Date sqlGetLastTimeEnded(String token) throws SQLException {
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+        String sqlGetBoolean = "SELECT `Last time ended` FROM `workers` WHERE `Login Token`=\""+token+"\";";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sqlGetBoolean);
+        rs.next();
+        Date checkas = rs.getDate("Last time ended");
+        return checkas;
     }
 }
