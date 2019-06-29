@@ -38,7 +38,8 @@ public class Time extends AppCompatActivity {
         setContentView(R.layout.activity_time);
         //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti boolean)=====
         try {
-            System.out.println(Main.sqlGetBoolean(LoginActivity.loginToken));
+            //LoginActivity.loginToken
+            System.out.println(Main.sqlGetBoolean("gvdsfgbxcg41"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -103,7 +104,12 @@ public class Time extends AppCompatActivity {
     }
     private void stopTimer() throws SQLException {
         //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
-        System.out.println(Main.sqlGetBoolean(LoginActivity.loginToken));
+        try {
+            System.out.println(Main.sqlGetBoolean("gvdsfgbxcg41"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         //============================================================================================
         this.startButton.setText("Start Timer");
         isRunning=false;
