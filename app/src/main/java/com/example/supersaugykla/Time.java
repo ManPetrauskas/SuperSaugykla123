@@ -37,12 +37,7 @@ public class Time extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
         //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti boolean)=====
-        try {
-            //LoginActivity.loginToken
-            System.out.println(Main.sqlGetBoolean("gvdsfgbxcg41"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        funkcij1();
         //=============================================================================
         if(isRunning){
             //======Tureciau pasiekti pradine data is db ir gauti dabartini total time=================
@@ -91,6 +86,14 @@ public class Time extends AppCompatActivity {
         };
 
         thread.start();
+    }
+    public static void funkcij1(){
+        try {
+            //LoginActivity.loginToken
+            System.out.println(Main.sqlGetBoolean("gvdsfgbxcg41"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void startTimer(){

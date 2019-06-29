@@ -31,17 +31,19 @@ public class Main {
         connection.close();
 
     */
-        //sqlUpdateStartWorkMethod("21vdf541gvcx");
-        sqlUpdateHours();
-        System.out.println(sqlGetBoolean("21vdf541gvcx"));
-        System.out.println(sqlGetLastTimeStarted("21vdf541gvcx").toString());
-        System.out.println(sqlGetLastTimeEnded("21vdf541gvcx").toString());
+        //sqlAddWorkerMethod();
+        //sqlUpdateStartWorkMethod("gvdsfgbxcg41");
+        //sqlUpdateEndWorkMethod("gvdsfgbxcg41");
+        //sqlUpdateHours();
+        //System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
+        //System.out.println(sqlGetLastTimeStarted("21vdf541gvcx").toString());
+        //System.out.println(sqlGetLastTimeEnded("21vdf541gvcx").toString());
+        //sqlUpdateBooleanToFalse("gvdsfgbxcg41");
     }
 
     public static void sqlAddWorkerMethod() throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
-
         String sqlAddWorker = "INSERT INTO workers (`First Name`,`Last Name`,`Login Token`) VALUES ('Vardenis','Pavardenis','gvdsfgbxcg41');";
         Statement statement = connection.createStatement();
         statement.executeUpdate(sqlAddWorker);                               //Naujas useris
