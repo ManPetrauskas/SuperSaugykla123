@@ -9,11 +9,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.supersaugykla.connectivity.ConnectionClass;
 import com.example.supersaugykla.ui.login.LoginActivity;
 import com.example.supersaugykla.ui.login.LoginViewModel;
 import com.example.supersaugykla.ui.login.LoginViewModelFactory;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -39,7 +43,7 @@ public class Time extends AppCompatActivity {
         //==============Cia tureciau matyt true false ar jau pradetas timer bazeje(gauti boolean)=====
         try {
             //LoginActivity.loginToken
-            System.out.println(Main.sqlGetBoolean("gvdsfgbxcg41"));
+            System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,7 +109,7 @@ public class Time extends AppCompatActivity {
     private void stopTimer() throws SQLException {
         //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
         try {
-            System.out.println(Main.sqlGetBoolean("gvdsfgbxcg41"));
+            System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -125,6 +129,17 @@ public class Time extends AppCompatActivity {
         long diffMinutes = this.timeDiff / (60 * 1000) % 60;
         long diffHours = this.timeDiff / (60 * 60 * 1000);
         this.timeTextVariable.setText("You are "+diffHours+" h "+diffMinutes+" min "+diffSeconds+" sec  working");
+    }
+    public static boolean sqlGetBoolean(String token) throws SQLException {
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
+        String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(sqlGetBoolean);
+        boolean checkas = true;
+        rs.next();
+        checkas = rs.getBoolean("Checkas");
+        return checkas;
     }
     /*
     @RequiresApi(api = Build.VERSION_CODES.O)
