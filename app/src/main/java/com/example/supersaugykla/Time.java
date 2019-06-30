@@ -108,11 +108,8 @@ public class Time extends AppCompatActivity {
     }
     private void stopTimer() throws SQLException {
         //===============Bazeje timerio uzbaigimas ir total hours suskaiciavimas=======================
-        try {
-            System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
+        System.out.println(sqlGetBoolean("gvdsfgbxcg41"));
 
         //============================================================================================
         this.startButton.setText("Start Timer");
