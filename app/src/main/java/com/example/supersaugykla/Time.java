@@ -134,7 +134,7 @@ public class Time extends AppCompatActivity {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sqlGetBoolean);
         boolean checkas = true;
-        rs.next();
+        boolean random =rs.next();
         checkas = rs.getBoolean("Checkas");
         return checkas;
     }
