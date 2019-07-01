@@ -127,7 +127,7 @@ public class Time extends AppCompatActivity {
         long diffHours = this.timeDiff / (60 * 60 * 1000);
         this.timeTextVariable.setText("You are "+diffHours+" h "+diffMinutes+" min "+diffSeconds+" sec  working");
     }
-    public static boolean sqlGetBoolean(String token) throws SQLException {
+    public boolean sqlGetBoolean(String token) throws SQLException {
         ConnectionClass connectionClass = new ConnectionClass();
         Connection connection = connectionClass.getConnection();
         String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
