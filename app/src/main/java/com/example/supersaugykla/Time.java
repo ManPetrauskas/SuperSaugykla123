@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Time extends AppCompatActivity {
     private TextView date1Variable;
@@ -128,41 +133,89 @@ public class Time extends AppCompatActivity {
         long diffHours = this.timeDiff / (60 * 60 * 1000);
         this.timeTextVariable.setText("You are "+diffHours+" h "+diffMinutes+" min "+diffSeconds+" sec  working");
     }
-    public boolean sqlGetBoolean(String token) throws SQLException {
+
+    private void testThread() throws ExecutionException, InterruptedException {
+        ExecutorService executor = Executors.newFixedThreadPool(1);
+        Future<ResultSet>  future = executor.submit(()->executeQuery("SELECT * FROM `workers`"));
+        future.get();
+    }
+
+    private ResultSet executeQuery(String query){
+        String dbName = "QJOh54KPlC";
+        String userName = "QJOh54KPlC";
+        String password= "RXNKeQ3fg7";
+        String url = "jdbc:mysql://remotemysql.com:3306/";
+
+        try (
+                Connection conn = DriverManager.getConnection(url+dbName, userName, password);
+                Statement stmt = conn.createStatement()
+        ) {
+            System.out.println(conn);
+            return stmt.executeQuery("executeQuery");
+
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean sqlGetBoolean(String token) throws SQLException{
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Where is your MySQL JDBC Driver?");
+            this.testThread();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
+//        ConnectionClass connectionClass = new ConnectionClass();
+//        ExecutorService executor = Executors.newFixedThreadPool(1);
+//        String query = "SELECT `Checkas` FROM `workers` WHERE `Login Token`='"+token+"'";
+//        Future<ResultSet>  future = executor.submit(()->connectionClass.executeQuery(query));
+//
+//        try {
+//            future.get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-        System.out.println("MySQL JDBC Driver Registered!");
-        Connection connection = null;
+        return true;
 
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/QJOh54KPlC","QJOh54KPlC", "RXNKeQ3fg7");
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
-            e.printStackTrace();
-        }
-
-        if (connection != null) {
-            System.out.println("You made it, take control your database now!");
-        } else {
-            System.out.println("Failed to make connection!");
-        }
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Where is your MySQL JDBC Driver?");
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("MySQL JDBC Driver Registered!");
+//        Connection connection = null;
+//
+//        try {
+//            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/QJOh54KPlC","QJOh54KPlC", "RXNKeQ3fg7");
+//
+//        } catch (SQLException e) {
+//            System.out.println("Connection Failed! Check output console");
+//            e.printStackTrace();
+//        }
+//
+//        if (connection != null) {
+//            System.out.println("You made it, take control your database now!");
+//        } else {
+//            System.out.println("Failed to make connection!");
+//        }
 
         //
 //        ConnectionClass connectionClass = new ConnectionClass();
 //        Connection connection = connectionClass.getConnection();
-        String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(sqlGetBoolean);
-        boolean checkas = true;
-        boolean random =rs.next();
-        checkas = rs.getBoolean("Checkas");
-        return checkas;
+//        String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
+//        Statement statement = connection.createStatement();
+//        ResultSet rs = statement.executeQuery(sqlGetBoolean);
+//        boolean checkas = true;
+//        boolean random =rs.next();
+//        checkas = rs.getBoolean("Checkas");
+//        return checkas;
     }
     /*
     @RequiresApi(api = Build.VERSION_CODES.O)
