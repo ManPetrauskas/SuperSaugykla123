@@ -15,6 +15,7 @@ import com.example.supersaugykla.ui.login.LoginViewModel;
 import com.example.supersaugykla.ui.login.LoginViewModelFactory;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -128,8 +129,33 @@ public class Time extends AppCompatActivity {
         this.timeTextVariable.setText("You are "+diffHours+" h "+diffMinutes+" min "+diffSeconds+" sec  working");
     }
     public boolean sqlGetBoolean(String token) throws SQLException {
-        ConnectionClass connectionClass = new ConnectionClass();
-        Connection connection = connectionClass.getConnection();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Where is your MySQL JDBC Driver?");
+            e.printStackTrace();
+        }
+
+        System.out.println("MySQL JDBC Driver Registered!");
+        Connection connection = null;
+
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/QJOh54KPlC","QJOh54KPlC", "RXNKeQ3fg7");
+
+        } catch (SQLException e) {
+            System.out.println("Connection Failed! Check output console");
+            e.printStackTrace();
+        }
+
+        if (connection != null) {
+            System.out.println("You made it, take control your database now!");
+        } else {
+            System.out.println("Failed to make connection!");
+        }
+
+        //
+//        ConnectionClass connectionClass = new ConnectionClass();
+//        Connection connection = connectionClass.getConnection();
         String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sqlGetBoolean);
