@@ -8,14 +8,14 @@ public class ConnectionClass {
 
     public Connection getConnection(){
 
-        String dbName = "duomenusaugykla";
-        String userName = "admin";
-        String password= "wUp8rkQmwRT2tX3";
+        String dbName = "QJOh54KPlC";
+        String userName = "QJOh54KPlC";
+        String password= "RXNKeQ3fg7";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/"+dbName,userName,password);
+            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/"+dbName,userName,password);
 
         } catch (Exception e) {
             e.printStackTrace();
