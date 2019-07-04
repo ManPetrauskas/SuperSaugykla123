@@ -3,6 +3,7 @@ package com.example.supersaugykla;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -129,33 +130,33 @@ public class Time extends AppCompatActivity {
         this.timeTextVariable.setText("You are "+diffHours+" h "+diffMinutes+" min "+diffSeconds+" sec  working");
     }
     public boolean sqlGetBoolean(String token) throws SQLException {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Where is your MySQL JDBC Driver?");
-            e.printStackTrace();
-        }
-
-        System.out.println("MySQL JDBC Driver Registered!");
-        Connection connection = null;
-
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/QJOh54KPlC","QJOh54KPlC", "RXNKeQ3fg7");
-
-        } catch (SQLException e) {
-            System.out.println("Connection Failed! Check output console");
-            e.printStackTrace();
-        }
-
-        if (connection != null) {
-            System.out.println("You made it, take control your database now!");
-        } else {
-            System.out.println("Failed to make connection!");
-        }
+//        try {
+//            Class.forName("com.mysql.jdbc.Driver");
+//        } catch (ClassNotFoundException e) {
+//            System.out.println("Where is your MySQL JDBC Driver?");
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println("MySQL JDBC Driver Registered!");
+//        Connection connection = null;
+//
+//        try {
+//            connection = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/QJOh54KPlC","QJOh54KPlC", "RXNKeQ3fg7");
+//
+//        } catch (SQLException e) {
+//            System.out.println("Connection Failed! Check output console");
+//            e.printStackTrace();
+//        }
+//
+//        if (connection != null) {
+//            System.out.println("You made it, take control your database now!");
+//        } else {
+//            System.out.println("Failed to make connection!");
+//        }
 
         //
-//        ConnectionClass connectionClass = new ConnectionClass();
-//        Connection connection = connectionClass.getConnection();
+        ConnectionClass connectionClass = new ConnectionClass();
+        Connection connection = connectionClass.getConnection();
         String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(sqlGetBoolean);
@@ -170,4 +171,28 @@ public class Time extends AppCompatActivity {
         return (Date) java.sql.Date.valueOf(String.valueOf(dateToConvert));
     }
     */
+    public class getBooleanFromSql extends AsyncTask<String,String,Boolean>
+    {
+
+        @Override
+        protected Boolean doInBackground(String... strings) {
+            String token = "gvdsfgbxcg41";
+            ConnectionClass connectionClass = new ConnectionClass();
+            Connection connection = connectionClass.getConnection();
+            String sqlGetBoolean = "SELECT `Checkas` FROM `workers` WHERE `Login Token`=\""+token+"\";";
+            Statement statement = null;
+            boolean checkas = true;
+            try {
+                statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(sqlGetBoolean);
+
+                boolean random =rs.next();
+                checkas = rs.getBoolean("Checkas");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            return checkas;
+        }
+    }
 }
